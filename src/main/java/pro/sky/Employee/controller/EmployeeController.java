@@ -32,7 +32,7 @@ public class EmployeeController {
                               @RequestParam("lastName") String lastName,
                               @RequestParam("department") int department,
                               @RequestParam("salary") double salary) {
-        Employee employee = new Employee(firstName, lastName,department, salary);
+        Employee employee = new Employee(firstName, lastName, department, salary);
         try {
             employeeService.addEmployee(employee);
         } catch (EmployeeStoragelsFullException | EmployeeAlreadyAddedException ex) {
@@ -60,7 +60,7 @@ public class EmployeeController {
                                @RequestParam("lastName") String lastName,
                                @RequestParam("department") int department,
                                @RequestParam("salary") double salary) {
-        Employee employee = new Employee(firstName, lastName,department, salary);
+        Employee employee = new Employee(firstName, lastName, department, salary);
         try {
             employeeService.findEmployee(employee);
         } catch (EmployeeNotFoundException ex) {
@@ -69,3 +69,4 @@ public class EmployeeController {
         return " Employee " + employee + "found ";
     }
 }
+//ролдл
