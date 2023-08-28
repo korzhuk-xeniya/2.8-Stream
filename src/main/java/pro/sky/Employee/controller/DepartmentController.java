@@ -32,7 +32,7 @@ public class DepartmentController {
                 departmentService.minSalaryEmployee(department);
     }
 
-    @GetMapping("/all")
+    @GetMapping(value = "/all", params = "department")
     public String getEmployeesInDepartment(@RequestParam("department") int department) {
         return "all employees in " + department + "department: " +
                 departmentService.getEmployeesInDepartment(department);
