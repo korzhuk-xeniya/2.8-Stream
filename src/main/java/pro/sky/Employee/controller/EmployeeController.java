@@ -1,5 +1,6 @@
 package pro.sky.Employee.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +10,7 @@ import pro.sky.Employee.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.Employee.exceptions.EmployeeNotFoundException;
 import pro.sky.Employee.exceptions.EmployeeStoragelsFullException;
 import pro.sky.Employee.service.EmployeeService;
+import pro.sky.Employee.util.EmployeeNameValidator;
 
 import java.util.Collection;
 
@@ -32,7 +34,11 @@ public class EmployeeController {
                               @RequestParam("lastName") String lastName,
                               @RequestParam("department") int department,
                               @RequestParam("salary") double salary) {
-        Employee employee = new Employee(firstName, lastName, department, salary);
+        EmployeeNameValidator.validateIsAlpha(firstName, lastName);
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
         try {
             employeeService.addEmployee(employee);
         } catch (EmployeeStoragelsFullException | EmployeeAlreadyAddedException ex) {
@@ -46,7 +52,11 @@ public class EmployeeController {
                                  @RequestParam("lastName") String lastName,
                                  @RequestParam("department") int department,
                                  @RequestParam("salary") double salary) {
-        Employee employee = new Employee(firstName, lastName, department, salary);
+        EmployeeNameValidator.validateIsAlpha(firstName, lastName);
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
         try {
             employeeService.removeEmployee(employee);
         } catch (EmployeeNotFoundException ex) {
@@ -60,7 +70,11 @@ public class EmployeeController {
                                @RequestParam("lastName") String lastName,
                                @RequestParam("department") int department,
                                @RequestParam("salary") double salary) {
-        Employee employee = new Employee(firstName, lastName, department, salary);
+        EmployeeNameValidator.validateIsAlpha(firstName, lastName);
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
         try {
             employeeService.findEmployee(employee);
         } catch (EmployeeNotFoundException ex) {
@@ -69,4 +83,3 @@ public class EmployeeController {
         return " Employee " + employee + "found ";
     }
 }
-//ролдл
