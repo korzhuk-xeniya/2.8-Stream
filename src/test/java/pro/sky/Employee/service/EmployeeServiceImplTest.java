@@ -12,7 +12,9 @@ private EmployeeServiceImpl underTest = new EmployeeServiceImpl();
         String lastName = "Ivanov";
         int department = 2;
         double salary = 90_000;
-        Employee employee = new Employee(firstName, lastName,department, salary);
+        Employee empl = new Employee(firstName, lastName,department, salary);
+
+        Employee result = underTest.addEmployee(empl);
 
 
     }
