@@ -10,7 +10,6 @@ public class Employee {
     private double salary;
 
 
-
     public Employee(String firstName, String lastName, int department, double salary) {
         this.lastName = lastName;
         this.firstName = firstName;
