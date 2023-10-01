@@ -35,16 +35,12 @@ public class EmployeeController {
                               @RequestParam("department") int department,
                               @RequestParam("salary") double salary) {
         EmployeeNameValidator.validateIsAlpha(firstName, lastName);
-        Employee employee = new Employee(
-                StringUtils.capitalize(firstName),
-                StringUtils.capitalize(lastName),
-                department, salary);
         try {
-            employeeService.addEmployee(employee);
+            employeeService.addEmployee(firstName, lastName, department, salary);
         } catch (EmployeeStoragelsFullException | EmployeeAlreadyAddedException ex) {
             return (ex.getMessage());
         }
-        return " Employee " + employee + " added ";
+        return " Employee " + firstName + " " + lastName + " " + department + " " + salary + " added ";
     }
 
     @GetMapping("/remove")
@@ -53,16 +49,13 @@ public class EmployeeController {
                                  @RequestParam("department") int department,
                                  @RequestParam("salary") double salary) {
         EmployeeNameValidator.validateIsAlpha(firstName, lastName);
-        Employee employee = new Employee(
-                StringUtils.capitalize(firstName),
-                StringUtils.capitalize(lastName),
-                department, salary);
+
         try {
-            employeeService.removeEmployee(employee);
+            employeeService.removeEmployee(firstName, lastName, department, salary);
         } catch (EmployeeNotFoundException ex) {
             return (ex.getMessage());
         }
-        return " Employee" + employee + " removed ";
+        return " Employee" + firstName + " " + lastName + " removed ";
     }
 
     @GetMapping("/find")
@@ -71,15 +64,12 @@ public class EmployeeController {
                                @RequestParam("department") int department,
                                @RequestParam("salary") double salary) {
         EmployeeNameValidator.validateIsAlpha(firstName, lastName);
-        Employee employee = new Employee(
-                StringUtils.capitalize(firstName),
-                StringUtils.capitalize(lastName),
-                department, salary);
+
         try {
-            employeeService.findEmployee(employee);
+            employeeService.findEmployee(firstName, lastName, department, salary);
         } catch (EmployeeNotFoundException ex) {
             return (ex.getMessage());
         }
-        return " Employee " + employee + "found ";
+        return " Employee " + firstName + " " + lastName + " " + department + " " + salary + "found ";
     }
 }

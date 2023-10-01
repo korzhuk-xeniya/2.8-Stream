@@ -1,5 +1,6 @@
 package pro.sky.Employee.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pro.sky.Employee.dto.Employee;
 import pro.sky.Employee.exceptions.EmployeeAlreadyAddedException;
@@ -22,35 +23,53 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
     @Override
-    public void addEmployee(Employee employee) {
+    public Employee addEmployee(String firstName, String lastName, int department, double salary) {
 
         if (MAX_NUMBER_OF_EMPLOYEE == employees.size()) {
             throw new EmployeeStoragelsFullException();
         }
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
 
         if (employees.containsKey(generateKey(employee))) {
             throw new EmployeeAlreadyAddedException();
         }
+
         employees.put(employee.getFullName(), employee);
 
+        return employee;
     }
 
+
     @Override
-    public void removeEmployee(Employee employee) {
+    public Employee removeEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
         if (!employees.containsKey(generateKey(employee))) {
             throw new EmployeeNotFoundException();
         } else {
             employees.remove(generateKey(employee));
         }
+        return employee;
     }
 
+
     @Override
-    public void findEmployee(Employee employee) {
+    public Employee findEmployee(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(
+                StringUtils.capitalize(firstName),
+                StringUtils.capitalize(lastName),
+                department, salary);
         if (!employees.containsKey(generateKey(employee))) {
             throw new EmployeeNotFoundException();
         } else {
             employees.get(generateKey(employee));
         }
+        return employee;
     }
 
     @Override
